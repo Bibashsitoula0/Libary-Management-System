@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title> Login</title>
+
+    <link href="~/theme/css/style.css" rel="stylesheet">
+   @* <link rel="icon" type="image/png" sizes="16x16" href="~/theme/images/favicon.png">*@
+    <!-- Pignose Calender -->
+   <link href="~/plugins/pg-calendar/css/pignose.calendar.min.css" rel="stylesheet">
+
+    <link href="~/theme/plugins/pg-calendar/css/pignose.calendar.min.css" rel="stylesheet">
+    <!-- Chartist -->
+    <link rel="stylesheet" href="~/plugins/chartist/css/chartist.min.css">
+    <link rel="stylesheet" href="~/plugins/chartist-plugin-tooltips/css/chartist-plugin-tooltip.css">
+    <!-- Custom Stylesheet -->
+    <link href="~/css/style.css" rel="stylesheet">
+
+</head>
+<body>
+
+    
+  
+        @RenderBody()
+  
+
+    <script src="~/theme/plugins/common/common.min.js"></script>
+    <script src="~/theme/js/custom.min.js"></script>
+    <script src="~/theme/js/settings.js"></script>
+    <script src="~/theme/js/gleek.js"></script>
+    <script src="~/theme/js/styleSwitcher.js"></script>
+
+
+  
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>

@@ -1,0 +1,47 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";  
+}
+
+
+<div class="login-form-bg h-150" style="margin-top:150px">
+    <div class="container h-100">
+        <div class="row justify-content-center h-100">
+            <div class="col-xl-6">
+                <div class="form-input-content">
+                    <div class="card login-form mb-0">
+                        <div class="card-body pt-5">
+                            <h4>Enter OTP (5 digits)</h4>
+                            <div class="basic-form">
+                                <form method="post" class="login-input">
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                    <div class="form-floating" style="margin-bottom: 20px;">
+                                        <input type="number" class="form-control" id="val-digits" name="val-digits" placeholder="Enter OTP" min="10000" max="99999" oninput="validateOTP(this)">
+                                        
+                                    </div>
+                                    <button type="submit" class="w-100 btn btn-lg btn-primary">Verify OTP</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+<script>
+
+    function validateOTP(input) {
+        debugger;
+        let value = input.value;
+        if (value.length > 5) {
+            input.value = value.slice(0, 5);
+        }
+    }
+</script>
