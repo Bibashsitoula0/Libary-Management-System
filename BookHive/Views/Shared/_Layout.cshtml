@@ -4,12 +4,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-    <title> Login</title>
+    <title>BookHive</title>
 
     <link href="~/theme/css/style.css" rel="stylesheet">
-  <link rel="icon" type="image/png" sizes="16x16" href="~/theme/images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="~/theme/images/favicon.png">
+
     <!-- Pignose Calender -->
-   @* <link href="~/plugins/pg-calendar/css/pignose.calendar.min.css" rel="stylesheet">*@
+    <link href="~/theme/plugins/pg-calendar/css/pignose.calendar.min.css" rel="stylesheet">
 
     <link href="~/theme/plugins/pg-calendar/css/pignose.calendar.min.css" rel="stylesheet">
     <!-- Chartist -->
@@ -251,6 +252,16 @@
                        
                         </ul>
                     </li>
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <i class="icon-speedometer menu-icon"></i><span class="nav-text">Setting</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="/Account/Register">Create User</a></li>
+
+                        </ul>
+                    </li>
+
                     <li class="mega-menu mega-menu-sm">
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <i class="icon-globe-alt menu-icon"></i><span class="nav-text">Layouts</span>
@@ -428,6 +439,9 @@
     <script src="~/theme/js/settings.js"></script>
     <script src="~/theme/js/gleek.js"></script>
     <script src="~/theme/js/styleSwitcher.js"></script>
+
+    <script src="~/theme/plugins/validation/jquery.validate.min.js"></script>
+    <script src="~/theme/plugins/validation/jquery.validate-init.js"></script>
 
    
     <script src="~/plugins/chart.js/Chart.bundle.min.js"></script>
