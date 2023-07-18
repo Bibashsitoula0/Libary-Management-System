@@ -3,6 +3,15 @@
     Layout = "~/Views/Shared/_LoginLayout.cshtml";  
 }
 
+@if (!string.IsNullOrEmpty(ViewBag.Message))
+{
+    <div class="toastr m-t-15">
+        <div class="text-left">
+            <button type="button" class="btn" id="toastr-success-top-right" onclick="toastMessage()"></button>
+        </div>
+    </div>
+}
+
 
 <div class="login-form-bg h-150" style="margin-top:150px">
     <div class="container h-100">
@@ -16,7 +25,7 @@
                                 <form method="post" class="login-input">
                                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                     <div class="form-floating" style="margin-bottom: 20px;">
-                                        <input type="number" class="form-control" id="val-digits" name="val-digits" placeholder="Enter OTP" min="10000" max="99999" oninput="validateOTP(this)">
+                                        <input type="number" class="form-control" id="val-digits" name="otp" placeholder="Enter OTP" min="10000" max="99999" oninput="validateOTP(this)" required>
                                         
                                     </div>
                                     <button type="submit" class="w-100 btn btn-lg btn-primary">Verify OTP</button>
@@ -43,5 +52,23 @@
         if (value.length > 5) {
             input.value = value.slice(0, 5);
         }
+    }
+
+    $(document).ready(function () {
+        debugger;
+        var message = '@ViewBag.Message';
+        if (message) {
+            toastMessage()
+        } else {
+
+        }
+
+    });
+
+    function toastMessage() {
+        debugger;
+        var message = '@ViewBag.Message';
+        toastr.success(message);
+
     }
 </script>

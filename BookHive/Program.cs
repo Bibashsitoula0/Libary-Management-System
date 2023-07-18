@@ -17,6 +17,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddScoped<BookHive.Helpers.Email>();
 
 
 var app = builder.Build();
