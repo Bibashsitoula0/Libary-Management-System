@@ -3,10 +3,35 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+@if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+{
+    <div class="toastr m-t-15">
+        <div class="text-left">
+            <button type="button" class="btn" id="toastr-warning-top-right" onclick="toastMessagewarning()"></button>
+        </div>
+    </div>
+}
+
+
+
+
 
 <div class="login-form-bg h-150">
+
+ 
         <div class="container-fluid h-100">
         <div class="row justify-content-center h-100">
+
+            @if (!string.IsNullOrEmpty(ViewBag.MessageWarning))
+            {
+                <div class="toastr m-t-15">
+                    <div class="text-left">
+                        <button type="button" class="btn" id="toastr-warning-top-right" onclick="toastMessagewarning()"></button>
+                    </div>
+                </div>
+            }
             <div class="col-xl-6">
                 <div class="form-input-content">
                     <div class="card login-form mb-0">
@@ -23,7 +48,7 @@
                                                 Username <span class="text-danger">*</span>
                                             </label>
                                             <div class="col-lg-12">
-                                                <input type="text" class="form-control" id="val-username" name="val-username" placeholder="Enter a username..">
+                                                <input type="text" class="form-control" id="val-username" name="username" placeholder="Enter a username.." required>
                                             </div>
                                         </div>
 
@@ -33,7 +58,7 @@
                                                 Email <span class="text-danger">*</span>
                                             </label>
                                             <div class="col-lg-12">
-                                                <input type="text" class="form-control" id="val-email" name="val-email" placeholder="Enter email..">
+                                                <input type="text" class="form-control" id="val-email" name="email" placeholder="Enter email.." required>
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -41,7 +66,7 @@
                                                 Password <span class="text-danger">*</span>
                                             </label>
                                             <div class="col-lg-12">
-                                                <input type="password" class="form-control" id="val-password" name="val-password" placeholder="Enter Password">
+                                                <input type="password" class="form-control" id="val-password" name="password" placeholder="Enter Password" required>
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -49,12 +74,13 @@
                                                 Confirm Password <span class="text-danger">*</span>
                                             </label>
                                             <div class="col-lg-12">
-                                                <input type="password" class="form-control" id="val-confirm-password" name="val-confirm-password" placeholder="Enter confirm password">
+                                                <input type="password" class="form-control" id="val-confirm-password" name="confirmpassword" placeholder="Enter confirm password"  required>
                                             </div>
                                         </div>
 
-                                        <div style="margin-top:15px">
-                                            <button type="submit" style="float:right" class="btn btn-primary">Submit</button>
+                                        <div style="margin-top: 15px;">
+                                            <button type="submit" style="display: inline-block; margin-left: auto;" class="btn btn-primary">Submit</button>                                         
+                                            <a href="/Account/UserList" class="btn btn-primary" style="display: inline-block;">Back</a>
                                         </div>
                                     </form>
                                 </div>
@@ -66,3 +92,22 @@
         </div>
     </div>
 </div>
+
+<script>
+
+    $(document).ready(function () {
+
+       
+        var message = '@ViewBag.Message';
+        if (message) {
+            SucessMessage(message)
+        }
+
+        var warningmessage = '@ViewBag.MessageWarning';
+        if (warningmessage) {
+            DangerMessage(warningmessage)
+        }
+    });
+
+
+</script>

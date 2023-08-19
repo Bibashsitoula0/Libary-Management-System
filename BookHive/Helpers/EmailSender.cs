@@ -25,7 +25,6 @@ namespace BookHive.Helpers
                 message.Body = bodyBuilder.ToMessageBody();               
                 var password = _configuration["Gmail:password"];
 
-
                 using (var client = new MailKit.Net.Smtp.SmtpClient())
                 {
                     client.Connect("smtp.gmail.com", 587, false);                 

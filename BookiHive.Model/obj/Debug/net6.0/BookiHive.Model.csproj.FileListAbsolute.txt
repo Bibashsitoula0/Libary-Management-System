@@ -1,0 +1,11 @@
+C:\LibaryManagementSystem\BookiHive.Model\bin\Debug\net6.0\BookiHive.Model.deps.json
+C:\LibaryManagementSystem\BookiHive.Model\bin\Debug\net6.0\BookiHive.Model.dll
+C:\LibaryManagementSystem\BookiHive.Model\bin\Debug\net6.0\BookiHive.Model.pdb
+C:\LibaryManagementSystem\BookiHive.Model\obj\Debug\net6.0\BookiHive.Model.GeneratedMSBuildEditorConfig.editorconfig
+C:\LibaryManagementSystem\BookiHive.Model\obj\Debug\net6.0\BookiHive.Model.AssemblyInfoInputs.cache
+C:\LibaryManagementSystem\BookiHive.Model\obj\Debug\net6.0\BookiHive.Model.AssemblyInfo.cs
+C:\LibaryManagementSystem\BookiHive.Model\obj\Debug\net6.0\BookiHive.Model.csproj.CoreCompileInputs.cache
+C:\LibaryManagementSystem\BookiHive.Model\obj\Debug\net6.0\BookiHive.Model.dll
+C:\LibaryManagementSystem\BookiHive.Model\obj\Debug\net6.0\refint\BookiHive.Model.dll
+C:\LibaryManagementSystem\BookiHive.Model\obj\Debug\net6.0\BookiHive.Model.pdb
+C:\LibaryManagementSystem\BookiHive.Model\obj\Debug\net6.0\ref\BookiHive.Model.dll

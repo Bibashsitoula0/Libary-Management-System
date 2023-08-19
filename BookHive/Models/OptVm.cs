@@ -2,6 +2,6 @@
 {
     public class OptVm
     {
-        public int otp { get; set; }
+        public string otp { get; set; }
     }
 }

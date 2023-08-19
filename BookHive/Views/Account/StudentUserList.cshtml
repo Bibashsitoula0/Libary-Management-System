@@ -1,0 +1,60 @@
+﻿@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = " Student User List";
+
+}
+@model List<RegisterList>
+
+<script src="~/theme/plugins/tables/js/jquery.dataTables.min.js"></script>
+<script src="~/theme/plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>
+<script src="~/theme/plugins/tables/js/datatable-init/datatable-basic.min.js"></script>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div style="overflow: auto;">
+                        <h4 class="card-title" style="float: left;">Student User List</h4>
+                       @*  <h5 style="float: right;"> <a href="/Account/Register" class="btn btn-primary">Create User</a></h5> *@
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered zero-configuration">
+                            <thead>
+                                <tr>
+                                    <th>Code</th>
+                                    <th>Email</th>
+                                    <th>Full Name</th>
+                                    <th>Role</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.code</td>
+                                        <td>@item.email</td>
+                                        <td>@item.full_name</td>
+                                        <td>@item.role</td>
+                                        <td>
+                                            <span>
+                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a>
+                                                <a href="/Account/StudentDelete?Id=@item.Id" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-close color-danger"></i></a>
+                                            </span>
+                                        </td>
+
+                                    </tr>
+                                }
+
+                            </tbody>
+                            <tfoot>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
