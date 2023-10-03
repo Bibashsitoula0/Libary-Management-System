@@ -1,7 +1,13 @@
 using Bookhive.Service.AccountService;
+using Bookhive.Service.AuthorService;
+using Bookhive.Service.CurrentUserService;
+using Bookhive.Service.StudentService;
 using BookHive.Dal.AccountRepository;
+using BookHive.Dal.AuthorRepository;
 using BookHive.Dal.DapperConfigure;
+using BookHive.Dal.StudentRepository;
 using BookHive.Data;
+using BookHive.Hubs;
 using BookHive.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +19,28 @@ builder.Services.AddHttpClient();
 builder.Services.AddControllersWithViews();
 
 
+// Add services to the container.
+builder.Services.AddControllersWithViews();
+
+builder.Services.AddSignalR();
+
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
+
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddTransient<IDataAccessLayer, DataAccessLayer>();
+builder.Services.AddScoped<BookHive.Helpers.Email>();
+builder.Services.AddTransient<IAccountService, AccountService>();
+builder.Services.AddTransient<IAccountRepository, AccountRepository>();
+builder.Services.AddTransient<IStudentService, StudentService>();
+builder.Services.AddTransient<IStudentRepository, StudentRepository>();
+builder.Services.AddTransient<IAuthorService, AuthorService>();
+builder.Services.AddTransient<IAuthorRepository, AuthorRepository>();
+builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
+
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("connection")));
+
 builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 {
     options.SignIn.RequireConfirmedAccount = false;
@@ -22,27 +50,6 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 .AddDefaultTokenProviders();
 
 
-
-// Add services to the container.
-builder.Services.AddControllersWithViews();
-
-
-
-
-
-
-builder.Services.AddAutoMapper(typeof(Program).Assembly);
-
-
-builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-builder.Services.AddTransient<IDataAccessLayer, DataAccessLayer>();
-builder.Services.AddScoped<BookHive.Helpers.Email>();
-builder.Services.AddTransient<IAccountService, AccountService>();
-builder.Services.AddTransient<IAccountRepository, AccountRepository>();
-
-
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("connection")));
 
 builder.Services.Configure<IdentityOptions>(options =>
 {
@@ -95,6 +102,8 @@ app.MapRazorPages();
 /*app.UseAuthorization();*/
 
 /**/
+
+app.MapHub<ChatHubs>("/chatHub");
 
 app.MapControllerRoute(
     name: "default",

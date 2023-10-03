@@ -1,0 +1,142 @@
+﻿@{
+
+    
+    ViewData["Title"] = " Chat";
+
+}
+@model List<RegisterList>
+
+<script src="~/theme/plugins/tables/js/jquery.dataTables.min.js"></script>
+<script src="~/theme/plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>
+<script src="~/theme/plugins/tables/js/datatable-init/datatable-basic.min.js"></script>
+
+   <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-4 col-xl-3">
+                        <div class="card">
+                            <div class="card-body">
+                               <h3>Chats</h3>
+                               <div class="media align-items-center mb-4">
+                                   
+                            <img class="mr-3" src="/Image/images.jpeg" width="80" height="80" alt="">
+                            <div class="media-body">
+                                <h3 class="mb-0" style="font-size:16px">Pikamy Cha</h3>
+                                <p class="text-muted mb-0">Canada</p>
+                            </div>
+
+                                 
+
+                        <img class="mr-3" src="/Image/images.jpeg" width="50" height="50" alt="">
+                        <div class="media-body">
+                            <h3 class="mb-0" style="font-size:16px">Pikamy Cha</h3>
+                            <p class="text-muted mb-0">Canada</p>
+                        </div>
+                                </div>
+
+                
+                               
+
+                               
+                            </div>
+                        </div>  
+                    </div>
+                </div>
+</div>
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div style="overflow: auto;">
+
+                        <input type="text" id="name" class="name" />
+
+                        <input type="text" id="message" class="message" />
+
+                        <button type="submit" class="sendmessage" id="sendmessage">save</button>
+                      
+                    </div>
+                  
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <ul id="discussion">
+
+    </ul>
+    </div>
+
+@* 
+<script src="https://cdn.jsdelivr.net/npm/@@microsoft/signalr@7.0.11/+esm"> </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.11/signalr.min.js"></script>
+<script>
+
+
+    var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
+
+    connection.start().catch(function (err) {
+        return console.error(err.toString());
+    });
+
+    document.getElementById("sendmessage").addEventListener("click", function (event) {
+
+        var user = document.getElementById("name").value;
+        var message = document.getElementById("message").value;
+
+        connection.invoke("sendmessage", user, message).catch(function (err) {
+            return console.error(err.toString());
+        }); 
+
+        event.preventDefault();
+
+    })
+
+    connection.on("Received Message", function (user,message) {
+        var da = user + ":" + message;
+        var li = document.createElement("li");
+        li.textContent = da;
+        document.getElementById('discussion').appendChild(li);
+
+    }); *@
+
+
+</script>
+
+
+        <style>
+    .chat-list {
+        width: 300px; /* Adjust the width as needed */
+        margin: 20px auto;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+    }
+
+    .chat {
+        display: flex;
+        margin-bottom: 10px;
+    }
+
+        .chat img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .chat h2 {
+            font-size: 16px;
+            margin: 0;
+        }
+
+        .chat p {
+            font-size: 12px;
+            color: #777;
+            margin: 0;
+        }
+        </style>

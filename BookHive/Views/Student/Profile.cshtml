@@ -1,0 +1,177 @@
+﻿@using BookiHive.Model;
+@model UserDetails
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+
+
+<div class="login-form-bg h-150" style="margin-top:50px">
+    <div class="container h-100">
+        <div class="row justify-content-center h-100">
+            <div class="col-xl-8">
+                <div class="form-input-content">
+                    <div class="card login-form mb-0">
+
+                        <div class="card-body pt-5">
+                            <div class="form-validation">
+
+                                <div class="basic-form">
+                                    <form id="Profile" method="post" class="form-valide">
+                                        <h4> Update Profile</h4>
+                                        <hr />
+
+                                        <div class="form-group row">
+                                            <label class="col-lg-12 col-form-label" for="val-email">
+                                                Email
+                                            </label>
+                                            <div class="col-lg-12">
+                                                <input type="email" class="form-control" id="val-email" value="@Model.email" name="email" placeholder="Enter email.." readonly>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-12 col-form-label" for="val-username">
+                                                User Name
+                                            </label>
+                                            <div class="col-lg-12">
+                                                <input type="text" class="form-control" id="val-username" value="@Model.full_name" name="username" placeholder="Enter code no" readonly>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-lg-12 col-form-label" for="val-email">
+                                                Email
+                                            </label>
+                                            <div class="col-lg-12">
+                                                <input type="email" class="form-control" id="val-email" value="@Model.email" name="email" readonly>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-lg-12 col-form-label" for="val-codeno">
+                                                Code No
+                                            </label>
+                                            <div class="col-lg-12">
+                                                <input type="text" class="form-control" id="val-codeno" value="@Model.codeno" name="code" placeholder="Enter code no" readonly>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-lg-12 col-form-label" for="val-image">
+                                                Qr Image
+                                            </label>
+                                            <div class="col-lg-12">
+                                                <img src="@Url.Content(Model.Qrcode)" style="width:100px;height:100px;" alt="qrcode" />
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-lg-12 col-form-label" for="val-image">
+                                                Profile Image
+                                            </label>
+                                            <div class="col-lg-12">
+                                                @if(Model.image == null)
+                                                {
+                                                    <input type="file" class="form-control" id="val-image" value="@Model.image" name="image">
+                                                                              
+                                                }else  {
+                                                    <img src="@Url.Content(Model.image)" style="width:100px;height:100px;" alt="image" />
+                                                    }
+
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-lg-12 col-form-label" for="val-phoneno">
+                                                phone no 
+                                            </label>
+                                            <div class="col-lg-12">
+                                                <input type="text" class="form-control" id="val-phoneno" value="@Model.phonenumber" name="phoneno" placeholder="Enter Phone no" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-lg-12 col-form-label" for="val-address">
+                                                Address
+                                            </label>
+                                            <div class="col-lg-12">
+                                                <input type="text" class="form-control" id="val-address" value="@Model.address" name="address" placeholder="Enter Address" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-lg-12 col-form-label" for="val-address">
+                                                About Us
+                                            </label>
+                                            <div class="col-lg-12">
+                                                <textarea class="form-control h-150px" rows="4" id="aboutus" name="aboutus"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                          
+                                              
+                                                    <label class="mr-sm-2">Faculty</label>
+                                            <div class="col-lg-12">
+                                                <select class="col-lg-12 col-form-label" id="faculty" name="faculty">
+                                                        <option value="">Choose faculty</option>
+                                                        <option value="1">BCA</option>
+                                                        <option value="2">BBA</option>
+                                                        <option value="3">BSC.CS.IT</option>
+                                                    </select>
+                                            </div>
+                                        
+                                            </div>
+
+                                        <div class="form-group row">
+
+                                          
+                                                <label class="mr-sm-2">Semister</label>
+                                            <div class="col-lg-12">
+                                                <select class="col-lg-12 col-form-label" id="semister" name="semister">
+                                                    <option value="">Choose Semister</option>
+                                                    <option value="1">1st</option>
+                                                    <option value="2">2nd</option>
+                                                    <option value="3">3rd</option>
+                                                    <option value="4">4th</option>
+                                                    <option value="5">5th</option>
+                                                    <option value="6">6th</option>
+                                                     <option value="7">7th</option>
+                                                    <option value="8">8th</option>
+                                                </select>
+                                            </div>
+                                         
+                                        </div>
+                                        <div class="form-group row">
+
+                                          
+                                                <label class="mr-sm-2">Year</label>
+                                            <div class="col-lg-12">
+                                                <select class="col-lg-12 col-form-label" id="year" name="year">
+                                                    <option value="">Choose Year</option>
+                                                    <option value="1">1st</option>
+                                                    <option value="2">2nd</option>
+                                                    <option value="3">3rd</option>
+                                                    <option value="4">4th</option>
+                                                   
+                                                </select>
+
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary" style="margin-top:10px;">Submit</button>
+                                        </div>
+                                        
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

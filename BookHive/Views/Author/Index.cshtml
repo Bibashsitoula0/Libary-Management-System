@@ -1,0 +1,60 @@
+﻿@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Author List";
+
+}
+@using BookHive.Models;
+ <AuthorList>;
+
+<script src="~/theme/plugins/tables/js/jquery.dataTables.min.js"></script>
+<script src="~/theme/plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>
+<script src="~/theme/plugins/tables/js/datatable-init/datatable-basic.min.js"></script>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div style="overflow: auto;">
+                        <h4 class="card-title" style="float: left;">User List</h4>
+                        <h5 style="float: right;"> <a href="/Author/AddAuthor" class="btn btn-primary">Add Author</a></h5>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered zero-configuration">
+                            <thead>
+                                <tr>
+                                   
+                                    <th>Author Name</th>                                 
+                                    <th>Action</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                                                      
+                                @foreach (var item in Model)
+                                {                           
+                                    <tr>
+                                          
+                                        <td>@item.name</td>                                      
+                                        <td>
+                                            <span>
+                                                <a href="#" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a>
+                                                <a href="/Author/Delete?Id=@item.id" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-close color-danger"></i></a>
+                                            </span>
+                                        </td>
+
+                                    </tr>
+                                }
+
+                            </tbody>
+                            <tfoot>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,133 @@
+﻿@using BookiHive.Model;
+@model UserDetails
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+@if (!string.IsNullOrEmpty(ViewBag.Message))
+{
+    <div class="toastr m-t-15">
+        <div class="text-left">
+            <button type="button" class="btn" id="toastr-success-top-right" onclick="toastMessage()"></button>
+        </div>
+    </div>
+}
+
+@if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+{
+    <div class="toastr m-t-15">
+        <div class="text-left">
+            <button type="button" class="btn" id="toastr-success-top-right" onclick="toastMessage()"></button>
+        </div>
+    </div>
+}
+
+<div class="container-fluid h-100" >
+        <div class="row justify-content-center h-100">
+  
+     
+            <div class="card" style="width:900px;">
+                <div class="card-body">
+                    <div class="media align-items-center mb-4">
+                       @if (Model.image == null)
+                    {
+                        <img class="mr-3" src="https://localhost:44395/Image/thumbnail.png" width="80" height="80" alt="">
+                    }else{
+                        <img class="mr-3" src="@Model.image" width="80" height="80" alt="">
+                    }
+                      
+                        <div class="media-body">
+                            <h3 class="mb-0">@Model.full_name</h3>
+                            <p class="text-muted mb-0">@Model.address</p>
+                        </div>
+                    </div>
+                <div class="row">
+                    <div class="col">
+
+                    <ul class="card-profile__info">
+                        <li class="mb-1"><strong class="text-dark mr-4">Fiscal Year :-</strong> <span>@Model.fiscalyear</span></li>
+                        <li><strong class="text-dark mr-4">Email :-</strong> <span>@Model.email</span></li>
+                    <li class="mb-1"><strong class="text-dark mr-4">Code No :-</strong> <span>@Model.codeno</span></li>                    
+                    <li class="mb-1"><strong class="text-dark mr-4">Mobile :-</strong> <span>@Model.phonenumber</span></li>
+                    </ul>
+                    </div>
+
+                    <div class="col" style="padding-top:-11px;text-align:center">
+                        <img class="mr-3" src="@Model.Qrcode" width="100" height="100" alt="">
+                    </div>
+
+                </div>
+
+
+
+                <div class="row ">
+
+                   
+                        <div class="col">
+
+                        <div class="card  ">
+                            <p>Facultiy:</p>
+                            <p>@Model.faculty</p>
+                        </div>
+                           
+                        </div>
+                    
+                  
+                 
+                        <div class="col">
+
+                          
+
+                            <div class="card ">
+                                <p>Semister:</p>
+                                <p>@Model.semister</p>
+
+                            </div>
+                          
+                        </div>
+
+                    <div class="col">
+
+                    
+                        <div class="card ">
+                            <p>Year:</p>
+                            <p>@Model.years</p>
+
+                        </div>
+                    </div>
+
+                    </div>
+             
+
+                    <h4>About Me :-</h4>
+                    <p>@Model.aboutus</p>
+                </div>
+            </div>
+        </div>
+      
+  
+</div>
+
+
+<script>
+
+    $(document).ready(function () {
+        debugger;
+        var message = '@ViewBag.Message';
+        if (message) {
+            SucessMessage(message)
+        }
+
+
+        var warningmessage = '@ViewBag.ErrorMessage';
+        if (warningmessage) {
+            DangerMessage(warningmessage)
+        }
+
+    });
+
+
+</script>

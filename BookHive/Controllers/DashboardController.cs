@@ -1,11 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BookHive.Controllers
 {
     public class DashboardController : Controller
     {
-        public IActionResult Index()
+        [Authorize(Roles = "admin")]
+        public IActionResult Index(string message)
         {
+            ViewBag.Message = message;
             return View();
         }
     }

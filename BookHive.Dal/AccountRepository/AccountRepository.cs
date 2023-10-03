@@ -19,9 +19,7 @@ namespace BookHive.Dal.AccountRepository
 
         public async Task<bool> DeleteUser(string userId)
         {
-            string query = @"update AspNetUsers set 
-                        is_active = @isActive              
-                        where
+            string query = @"delete AspNetUsers where 
                         Id = @id                       
                 ";
             var parameters = new
@@ -67,6 +65,18 @@ namespace BookHive.Dal.AccountRepository
              join ""AspNetRoles"" ar on ar.""Id""=r.""RoleId""
              where au.""Email""=@emails and au.""is_active""=@isactive";
             var parameters = new { emails = email, isactive = "true" };
+            var data = await _dah.FetchDerivedModelAsync<RegisterList>(query, parameters);
+            return data;
+        }
+
+        public async Task<List<RegisterList>> Getstudentbyid(string userid)
+        {
+            string query = @"select ar.""Name"" as role , au.""UserName"" as user_name ,au.""Email"" as email,au.""filename"" as filename,au.""schoolCode"" as code
+               from ""AspNetUsers"" as au
+              join ""AspNetUserRoles"" as r on r.""UserId""=au.""Id""
+             join ""AspNetRoles"" ar on ar.""Id""=r.""RoleId""
+             where au.""Id""=@Id and au.""is_active""=@isactive";
+            var parameters = new { Id = userid, isactive = "true" };
             var data = await _dah.FetchDerivedModelAsync<RegisterList>(query, parameters);
             return data;
         }

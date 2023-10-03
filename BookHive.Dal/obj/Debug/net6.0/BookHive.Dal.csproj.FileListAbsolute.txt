@@ -1,0 +1,15 @@
+C:\LibaryManagementSystem\BookHive.Dal\obj\Debug\net6.0\BookHive.Dal.csproj.AssemblyReference.cache
+C:\LibaryManagementSystem\BookHive.Dal\obj\Debug\net6.0\BookHive.Dal.GeneratedMSBuildEditorConfig.editorconfig
+C:\LibaryManagementSystem\BookHive.Dal\obj\Debug\net6.0\BookHive.Dal.AssemblyInfoInputs.cache
+C:\LibaryManagementSystem\BookHive.Dal\obj\Debug\net6.0\BookHive.Dal.AssemblyInfo.cs
+C:\LibaryManagementSystem\BookHive.Dal\obj\Debug\net6.0\BookHive.Dal.csproj.CoreCompileInputs.cache
+C:\LibaryManagementSystem\BookHive.Dal\bin\Debug\net6.0\BookHive.Dal.deps.json
+C:\LibaryManagementSystem\BookHive.Dal\bin\Debug\net6.0\BookHive.Dal.dll
+C:\LibaryManagementSystem\BookHive.Dal\bin\Debug\net6.0\BookHive.Dal.pdb
+C:\LibaryManagementSystem\BookHive.Dal\obj\Debug\net6.0\BookHive.Dal.dll
+C:\LibaryManagementSystem\BookHive.Dal\obj\Debug\net6.0\refint\BookHive.Dal.dll
+C:\LibaryManagementSystem\BookHive.Dal\obj\Debug\net6.0\BookHive.Dal.pdb
+C:\LibaryManagementSystem\BookHive.Dal\obj\Debug\net6.0\ref\BookHive.Dal.dll
+C:\LibaryManagementSystem\BookHive.Dal\bin\Debug\net6.0\BookiHive.Model.dll
+C:\LibaryManagementSystem\BookHive.Dal\bin\Debug\net6.0\BookiHive.Model.pdb
+C:\LibaryManagementSystem\BookHive.Dal\obj\Debug\net6.0\BookHive.Dal.csproj.CopyComplete

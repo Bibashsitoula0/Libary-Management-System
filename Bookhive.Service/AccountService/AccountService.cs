@@ -35,6 +35,12 @@ namespace Bookhive.Service.AccountService
             return data;
         }
 
+        public async Task<List<RegisterList>> Getstudentbyid(string userid)
+        {
+            var data = await _accountRepository.Getstudentbyid(userid);
+            return data;
+        }
+
         public async Task<List<RegisterList>> RegisterGeneralUserList()
         {
             var data = await _accountRepository.RegisterGeneralUserList();

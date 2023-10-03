@@ -1,0 +1,187 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+@if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+{
+    <div class="toastr m-t-15">
+        <div class="text-left">
+            <button type="button" class="btn" id="toastr-warning-top-right" onclick="toastMessagewarning()"></button>
+        </div>
+    </div>
+}
+
+
+
+
+
+<div class="login-form-bg h-150">
+
+    <div class="container-fluid h-100">
+        <div class="row justify-content-center h-100">
+
+            @if (!string.IsNullOrEmpty(ViewBag.MessageWarning))
+            {
+                <div class="toastr m-t-15">
+                    <div class="text-left">
+                        <button type="button" class="btn" id="toastr-warning-top-right" onclick="toastMessagewarning()"></button>
+                    </div>
+                </div>
+            }
+            <div class="col-xl-6">
+                <div class="form-input-content">
+                    <div class="card login-form mb-0">
+
+                        <div class="card-body pt-3">
+                            <div class="form-validation">
+
+                                <div class="basic-form">
+                                    <form id="CreateForm" method="post" class="form-valide" enctype="multipart/form-data">
+                                        <h4>Add Book</h4>
+                                        <hr />
+                                        <div class="form-group row">
+                                            <label class="col-lg-12 col-form-label" for="val-username">
+                                                Book Name <span class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-lg-12">
+                                                <input type="text" class="form-control" id="val-username" name="bookname" placeholder="Enter a book name.." required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-12 col-form-label" for="val-username">
+                                                Upload Image <span class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-lg-12">
+                                                <input type="file" class="form-control" id="val-username" name="bookimage">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-12 col-form-label" for="val-username">
+                                                Publisher Name <span class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-lg-12">
+                                                <input type="text" class="form-control" id="val-username" name="publisher" placeholder="Enter a publisher name.." required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-12 col-form-label" for="val-username">
+                                                Price <span class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-lg-12">
+                                                <input type="number" class="form-control" id="val-username" name="price" placeholder="Enter a price.." required>
+                                            </div>
+                                        </div>
+                                         <div class="form-group row">
+                                            <label class="col-lg-12 col-form-label" for="val-username">
+                                                Book Count <span class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-lg-12">
+                                                <input type="number" class="form-control" id="val-username" name="totalbook" placeholder="Enter a book count.." required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+
+
+                                            <label class="col-lg-12 col-form-label">Author</label>
+                                            <div class="col-lg-12">
+                                                <select class="col-lg-12 col-form-label" id="authorid" name="authorid">
+                                                    <option value="">Choose Year</option>
+                                                    @foreach (var item in ViewBag.Authorname)
+                                                    {
+                                                        <option value=@item.id>@item.name</option>
+                                                       
+                                                    }
+                                                    
+
+                                                </select>
+
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group row">
+
+                                            <label class="col-lg-12 col-form-label">Faculty</label>
+                                            <div class="col-lg-12">
+                                                <select class="col-lg-12 col-form-label" id="faculty" name="faculty">
+                                                    <option value="">Choose faculty</option>
+                                                    @foreach (var item in ViewBag.Faculty)
+                                                    {
+                                                        <option value=@item.id>@item.faculty</option>
+
+                                                    }
+                                                </select>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-group row">
+
+
+                                            <label class="col-lg-12 col-form-label">Semister</label>
+                                            <div class="col-lg-12">
+                                                <select class="col-lg-12 col-form-label" id="semister" name="semister">
+                                                    <option value="">Choose Semister</option>
+                                                    @foreach (var item in ViewBag.Semister)
+                                                    {
+                                                        <option value=@item.id>@item.semister</option>
+
+                                                    }
+                                                    
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-12 col-form-label">Year</label>
+                                            <div class="col-lg-12">
+                                                <select class="col-lg-12 col-form-label" id="year" name="year">
+                                                    <option value="">Choose Year</option>
+                                                    @foreach (var item in ViewBag.Year)
+                                                    {
+                                                        <option value=@item.id>@item.year</option>
+
+                                                    }
+
+
+                                                </select>
+
+                                            </div>
+                                        </div>
+
+                                        <div style="margin-top: 15px;">
+                                            <button type="submit" style="display: inline-block; margin-left: auto;" class="btn btn-primary">Submit</button>
+                                            <a href="/Author/BookList" class="btn btn-primary" style="display: inline-block;">Back</a>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $(document).ready(function () {
+
+
+        var message = '@ViewBag.Message';
+        if (message) {
+            SucessMessage(message)
+        }
+
+        var warningmessage = '@ViewBag.MessageWarning';
+        if (warningmessage) {
+            DangerMessage(warningmessage)
+        }
+    });
+
+
+</script>
+
+

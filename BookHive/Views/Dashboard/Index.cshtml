@@ -3,17 +3,33 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@if (!string.IsNullOrEmpty(ViewBag.Message))
+{
+    <div class="toastr m-t-15">
+        <div class="text-left">
+            <button type="button" class="btn" id="toastr-success-top-right" onclick="toastMessage()"></button>
+        </div>
+    </div>
+}
 
+@if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+{
+    <div class="toastr m-t-15">
+        <div class="text-left">
+            <button type="button" class="btn" id="toastr-success-top-right" onclick="toastMessage()"></button>
+        </div>
+    </div>
+}
 
     <div class="container-fluid mt-3">
         <div class="row">
             <div class="col-lg-3 col-sm-6">
                 <div class="card gradient-1">
                     <div class="card-body">
-                        <h3 class="card-title text-white">Products Sold</h3>
+                        <h3 class="card-title text-white">Book Sold</h3>
                         <div class="d-inline-block">
                             <h2 class="text-white">4565</h2>
-                            <p class="text-white mb-0">Jan - March 2019</p>
+                            <p class="text-white mb-0">Jan - March 2023</p>
                         </div>
                         <span class="float-right display-5 opacity-5"><i class="fa fa-shopping-cart"></i></span>
                     </div>
@@ -25,7 +41,7 @@
                         <h3 class="card-title text-white">Net Profit</h3>
                         <div class="d-inline-block">
                             <h2 class="text-white">$ 8541</h2>
-                            <p class="text-white mb-0">Jan - March 2019</p>
+                            <p class="text-white mb-0">Jan - March 2023</p>
                         </div>
                         <span class="float-right display-5 opacity-5"><i class="fa fa-money"></i></span>
                     </div>
@@ -34,10 +50,10 @@
             <div class="col-lg-3 col-sm-6">
                 <div class="card gradient-3">
                     <div class="card-body">
-                        <h3 class="card-title text-white">New Customers</h3>
+                        <h3 class="card-title text-white">New Student</h3>
                         <div class="d-inline-block">
                             <h2 class="text-white">4565</h2>
-                            <p class="text-white mb-0">Jan - March 2019</p>
+                            <p class="text-white mb-0">Jan - March 2023</p>
                         </div>
                         <span class="float-right display-5 opacity-5"><i class="fa fa-users"></i></span>
                     </div>
@@ -46,10 +62,10 @@
             <div class="col-lg-3 col-sm-6">
                 <div class="card gradient-4">
                     <div class="card-body">
-                        <h3 class="card-title text-white">Customer Satisfaction</h3>
+                    <h3 class="card-title text-white">Student Satisfaction</h3>
                         <div class="d-inline-block">
                             <h2 class="text-white">99%</h2>
-                            <p class="text-white mb-0">Jan - March 2019</p>
+                            <p class="text-white mb-0">Jan - March 2023</p>
                         </div>
                         <span class="float-right display-5 opacity-5"><i class="fa fa-heart"></i></span>
                     </div>
@@ -608,3 +624,21 @@
         </div>
     </div>
   
+    <script>
+     $(document).ready(function () {
+        debugger;
+        var message = '@ViewBag.Message';
+        if (message) {
+            SucessMessage(message)
+        }
+
+
+        var warningmessage = '@ViewBag.ErrorMessage';
+        if (warningmessage) {
+            DangerMessage(warningmessage)
+        }
+
+    });
+
+
+</script>

@@ -19,12 +19,15 @@ using System.Drawing.Imaging;
 using QRCode = QRCoder.QRCode;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Hosting;
+using static iTextSharp.text.pdf.AcroFields;
 
 namespace BookHive.Controllers
 {
     public class AccountController : Controller
     {
         private IConfiguration _configuration;
+        private Microsoft.AspNetCore.Hosting.IHostingEnvironment Environment;
         private UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly Email _email;
@@ -32,7 +35,7 @@ namespace BookHive.Controllers
         private IAccountService _accountService;
         public readonly IHttpContextAccessor _httpContextAccessor;
 
-        public AccountController(SignInManager<ApplicationUser> signInManager, IConfiguration configuration, Email email, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, IAccountService accountService, IHttpContextAccessor httpContextAccessor)
+        public AccountController(SignInManager<ApplicationUser> signInManager, IConfiguration configuration, Email email, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, IAccountService accountService, IHttpContextAccessor httpContextAccessor, Microsoft.AspNetCore.Hosting.IHostingEnvironment environment)
         {
             _signInManager = signInManager;
             _configuration = configuration;
@@ -41,6 +44,7 @@ namespace BookHive.Controllers
             _roleManager = roleManager;
             _accountService = accountService;
             _httpContextAccessor = httpContextAccessor;
+            Environment = environment;
         }
 
         public IActionResult Index()
@@ -50,8 +54,9 @@ namespace BookHive.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        public IActionResult Login()
+        public IActionResult Login(string  message)
         {
+            ViewBag.Message=message;
             return View();
         }
 
@@ -82,13 +87,14 @@ namespace BookHive.Controllers
 
                     if (da.role == "admin")
                     {
-                        ViewBag.Message = "Login Sucessfully";
-                        return LocalRedirect("/Dashboard/Index");
+                            ViewBag.Message = "Login Sucessfully";
+                            return RedirectToAction("Index", "Dashboard", new { message = ViewBag.Message });                           
+                       
                     }
                     else if (da.role == "Student")
                     {
                         ViewBag.Message = "Login Sucessfully";
-                        return LocalRedirect("/Student/Index");
+                        return RedirectToAction("Index","Student",new {message= ViewBag.Message });
                     }
                                        
                 }
@@ -173,7 +179,7 @@ namespace BookHive.Controllers
 
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "admin")]
         [HttpGet]
         public async Task<Object> UserList()
         {
@@ -181,7 +187,7 @@ namespace BookHive.Controllers
             return View(UserList);
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "admin")]
         [HttpGet]
         public IActionResult Register()
         {
@@ -189,7 +195,7 @@ namespace BookHive.Controllers
         }
 
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public async Task<Object> Register(User user)
         {
@@ -254,7 +260,6 @@ namespace BookHive.Controllers
 
         }
 
-
         [HttpGet]
         public async Task<Object> LogOut()
         {
@@ -263,6 +268,7 @@ namespace BookHive.Controllers
             return RedirectToAction("Login", "Account");
         }
 
+        [Authorize(Roles = "admin")]
         [HttpGet]
         public async Task<Object> Delete(string Id)
         {
@@ -271,6 +277,8 @@ namespace BookHive.Controllers
             return RedirectToAction("UserList", "Account");
         }
 
+
+        [Authorize(Roles = "admin")]
         [HttpGet]
         public async Task<Object> StudentDelete(string Id)
         {
@@ -285,6 +293,13 @@ namespace BookHive.Controllers
         public async Task<Object> StudentUserList()
         {
             var UserList = await _accountService.StudentUserList();
+            foreach (var item in UserList)
+            {
+                
+                string imagePath =  "/Image/" + item.filename;
+                item.filename = imagePath;
+            }
+            
             return View(UserList);
         }
 
@@ -372,7 +387,6 @@ namespace BookHive.Controllers
 
         }
 
-
         [HttpGet]
         public async Task<IActionResult> StudentSendOtp()
         {
@@ -428,13 +442,14 @@ namespace BookHive.Controllers
         public async Task<IActionResult> StudentVerify(OptVm vm)
         {
             try
+
             {
             var verficode = HttpContext.Session.GetString("VerifyCode");
-            var sendotp = vm.otp;
+            var sendotp = vm.otp;   
 
             if (verficode == sendotp)
             {
-                return RedirectToAction("StudentConfirmPassword","Account");
+                return RedirectToAction("StudentConfirmPassword", "Account");
             }
             else
             {
@@ -489,22 +504,22 @@ namespace BookHive.Controllers
                     await _roleManager.CreateAsync(new IdentityRole(role));
 
                 await _userManager.AddToRoleAsync(applicationUser, role);
-
-              
+                            
 
                 HttpContext.Session.Remove("Email");
                 HttpContext.Session.Remove("Code");
                 HttpContext.Session.Remove("Username");
                 HttpContext.Session.Remove("VerifyCode");
 
-                return LocalRedirect("/LibaryBook/Index");
+                ViewBag.Message = "User Created sucessfully..Now you can login";
+                return RedirectToAction("Login","Account" ,new {message = ViewBag.Message });
             }
             else
             {
                 foreach (var error in result.Errors)
                 {
                     var errorMessage = error.Description;
-                    ViewBag.MessageWarning = errorMessage;
+                    ViewBag.ErrorMessage = errorMessage;
                     return View();
                 }
             }
@@ -513,6 +528,20 @@ namespace BookHive.Controllers
             return View();
 
         }
+
+
+        [HttpGet]
+        [Authorize(Roles = "admin")]
+        public async Task<IActionResult> StudentDetails(string Id)
+        {
+            var data = await _accountService.Getstudentbyid(Id);
+            var details = data.FirstOrDefault();
+            details.filename = "/Image/" + details.filename;
+            return View(details);
+
+        }
+
+       
 
 
 

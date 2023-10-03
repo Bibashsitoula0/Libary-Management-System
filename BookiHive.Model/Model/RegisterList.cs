@@ -8,7 +8,7 @@
         public string role { get; set; }     
         public string email { get; set; }
         public string code { get; set; }
-
+        public string filename { get; set; }
 
     }
 }

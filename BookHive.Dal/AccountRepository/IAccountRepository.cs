@@ -13,7 +13,8 @@ namespace BookHive.Dal.AccountRepository
         Task<List<RegisterList>> StudentUserList();
         Task<bool> DeleteUser(string Id);
         Task<bool> GetCheckActiveUser(string user_id);
-        Task<List<RegisterList>> Getrole(string role);
+        Task<List<RegisterList>> Getrole(string role); 
+         Task<List<RegisterList>> Getstudentbyid(string userid);
 
 
 

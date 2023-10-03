@@ -1,0 +1,91 @@
+﻿@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+ 
+
+}
+@using BookHive.Models;
+<BookList>
+
+    <script src="~/theme/plugins/tables/js/jquery.dataTables.min.js"></script>
+    <script src="~/theme/plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>
+    <script src="~/theme/plugins/tables/js/datatable-init/datatable-basic.min.js"></script>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div style="overflow: auto;">
+                            <h4 class="card-title" style="float: left;">Book List</h4>
+                            <h5 style="float: right;"> <a href="/Author/AddBook" class="btn btn-primary">Add Book</a></h5>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered zero-configuration">
+                                <thead>
+                                    <tr>
+                                        <th>Book Id</th>                                      
+                                        <th>Book Name</th>
+                                        <th>Author Name</th>
+                                        <th>Publisher Name</th>
+                                        <th>bookimage</th>
+                                        <th>Total Book</th>
+                                        <th>Available Book</th>
+                                        <th>lend Book</th>
+                                        <th>Price</th>
+                                        <th>Faculty</th>
+                                        <th>Semister</th>
+                                        <th>Year</th>
+                                        <th>Action</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                   @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>@item.bookid</td>
+                                            <td>@item.bookname</td>
+                                            <td>@item.authorname</td>
+                                            <td>@item.publisher</td>
+                                            @if (@item.bookimage != "/Image/")
+                                            {
+                                                <td><img src="@Url.Content(item.bookimage)" style="width:101px;height:81px;" alt="book image" /></td>
+                                            }else
+                                            {
+                                                <td>  <img src="https://localhost:44395/Image/Book.jpeg" style="width:101px;height:81px;" alt="book" /></td>
+                                               
+                                            }
+
+                                           
+                                            <td>@item.totalbook</td>
+                                            <td>@item.availablebooks</td>
+                                            <td>@item.totalbooktaken</td>
+                                            <td>@item.price</td>
+                                            <td>@item.facultytype</td>
+                                            <td>@item.semistertype</td>
+                                            <td>@item.year</td>
+                                           
+                                            <td>
+                                                <span>
+                                                    <a href="#" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil color-muted m-r-5"></i> </a>
+                                                    <a href="/Author/DeleteBook?Id=@item.bookid" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-close color-danger"></i></a>
+                                                </span>
+                                            </td>
+
+                                        </tr>
+                                    }
+
+                                </tbody>
+                                <tfoot>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
