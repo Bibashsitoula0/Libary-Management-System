@@ -16,11 +16,8 @@ using Microsoft.Extensions.FileProviders;
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
 builder.Services.AddHttpClient();
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
-
-// Add services to the container.
-builder.Services.AddControllersWithViews();
 
 builder.Services.AddSignalR();
 

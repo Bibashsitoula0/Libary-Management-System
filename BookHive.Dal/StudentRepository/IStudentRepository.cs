@@ -10,5 +10,11 @@ namespace BookHive.Dal.StudentRepository
     public interface IStudentRepository
     {
         Task<List<UserDetails>> GetStudentDetails(string userid);
+        Task<List<CartBookViewModel>> GetListOfApprovcal(); 
+        Task<List<CartViewModel>> getBorrowBookList();
+        Task<List<object>> GetNewStudent();
+        Task<List<Book>> GEtTotalBook();
+
     }
 }
+  

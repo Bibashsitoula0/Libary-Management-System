@@ -6,6 +6,11 @@
 }
 @using BookHive.Models;
 <CartList>
+
+
+    @{
+        var jsonModel = System.Text.Json.JsonSerializer.Serialize(Model);
+    }
     
 
   @*   <script src="~/theme/plugins/tables/js/jquery.dataTables.min.js"></script>
@@ -30,7 +35,7 @@
                                         <th>Semister</th>
                                         <th>Year</th>
                                         <th>Price</th>
-                                        <th>Action</th>
+                                        <th>Remove selected book</th>
 
                                     </tr>
                                 </thead>
@@ -60,15 +65,38 @@
                                 <tfoot>
                                 </tfoot>
                             </table>
+                            @if (Model.Count > 0)
+                            {
+                               
+                                  <div style="margin-top:10px; display: flex; flex-direction: column; align-items: center;">
+                                 @if (Model[0].request == 0 || Model[0].request == null)
+                                {
 
-                            <div style="margin-top:10px; display: flex; flex-direction: column; align-items: center;">
-                                <p>You can click the button to request a book &#128516</p>
-                                <p>&#129035</p>
-                             
-                                <button type="submit" id="sendnotification" class="btn btn-primary mb-0" onclick="RequestBook()">Request Book</button>
+                                    <p>You can click the button to request a book &#128516</p>
+                                    <p>&#129035</p>
+                                }else{
+                                    <p>You can click the button to cancel the book request &#128516</p>
+                                }
+                                @if (Model[0].request == 0 || Model[0].request == null)
+                                {
+                                    <button type="submit" id="sendnotification" class="btn btn-primary mb-0" onclick="RequestBook(@jsonModel)">Request Book</button>
+                                }else{
+                                        <button type="submit" id="sendnotification" class="btn btn-primary mb-0" onclick="CancelBookRequest(@jsonModel)">Cancel Book Request</button>
+                                }
+
                             </div>
-
-                           
+                                @if (Model[0].request == 0 || Model[0].request == null)
+                            {
+                                
+                            }
+                            else
+                                {
+                                <div style="margin-top:10px; display: flex; flex-direction: column; align-items: center;font-family:italic">
+                                    <h5 style="color:red">Your request send to the libary admin of college. Please wait for the approval</h5>
+                                    </div>
+                                }                               
+                            
+                            }
                            
                         </div>
                     </div>
@@ -86,4 +114,44 @@
                 info: false,
             });
         });
+
+       
+            function RequestBook(requestdata) {
+            debugger;
+               
+                console.log("requestdata", requestdata);  
+                $.ajax({
+                url: '@Url.Action("RequestBook", "Student")',
+                    type: 'POST',
+                data: { Request: 1, cartlist: requestdata },
+                    success: function (data) {
+                        console.log('Book request successfully');
+                        window.location.reload();
+                    },
+                    error: function () {
+                        // Handle the error, if any
+                        console.log('Error while borrowing the book');
+                    }
+                });
+            }
+
+        function CancelBookRequest(requestdata) {
+            debugger;
+            console.log("requestdata", requestdata);
+            $.ajax({
+                url: '@Url.Action("RequestBook", "Student")',
+                type: 'POST',
+                data: { Request: 0, cartlist: requestdata },
+                success: function (data) {
+                    console.log('Book request successfully');
+                    window.location.reload();
+                },
+                error: function () {
+                    // Handle the error, if any
+                    console.log('Error while borrowing the book');
+                }
+            });
+        }
+
+
     </script>

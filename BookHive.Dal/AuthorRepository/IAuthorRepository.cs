@@ -10,7 +10,8 @@ namespace BookHive.Dal.AuthorRepository
 {
     public interface IAuthorRepository
     {
-        Task<List<AuthorList>> GetList();
+        Task<List<Book>> GetBook(int id);
+        Task<List<AuthorList>> GetList(); 
         Task<int> AddAuthor(AuthorList model);
         Task<bool> DeleteUser(int Id);
         Task<bool> DeleteBook(int Id);
@@ -20,10 +21,15 @@ namespace BookHive.Dal.AuthorRepository
         Task<List<Faculty>> GetFaculty();
         Task<List<AuthorList>> GetAuthor();
         Task<int> AddBook(Book model);
+        Task<bool> UpdateBook(Book model);
         Task<int> SaveCart(Cart model); 
        Task<List<CartList>> getCart(string userid);
+        Task<List<Cart>> getCartList(int bookid,string userid);
+        Task<bool> DeleteCart(int Id,string userid); 
+       Task<bool> ApproveRequest(int request,int cardId, int bookid);
+        Task<bool> ApproveStudent( bool approve, int cartid);
+        Task<bool> IsBookTaken(bool approve, int cartid);
 
-        Task<bool> DeleteCart(int Id,string userid);
 
     }
 }

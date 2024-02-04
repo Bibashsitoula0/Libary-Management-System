@@ -1,0 +1,243 @@
+﻿@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Student Book Approval List";
+
+}
+@model List<BookiHive.Model.CartBookViewModel>
+
+ @using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+
+    var user = await UserManager.GetUserAsync(User);
+    var roles = await UserManager.GetRolesAsync(user);
+    var userRole = roles.FirstOrDefault(); 
+}
+
+
+@if (!string.IsNullOrEmpty(ViewBag.Message))
+{
+    <div class="toastr m-t-15">
+        <div class="text-left">
+            <button type="button" class="btn" id="toastr-success-top-right" onclick="toastMessage()"></button>
+        </div>
+    </div>
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div style="overflow: auto;">
+                           @if(userRole == "Student")
+                        {
+                            <h4 class="card-title" style="text-align:center;justify-content:center;">Approved by librarian</h4>
+
+                            <p style="text-align: center; font-style: italic;">Now you can take this book from your college</p>
+                        }
+                        else
+                        {
+                            <h4 class="card-title" style="text-align:center;justify-content:center;">Students request to lend books list</h4>
+                        }
+                       
+
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered zero-configuration">
+                            <thead>
+                                <tr>
+                                    <th>Student Name</th>
+                                    <th>Student Code</th>
+                                    <th>Semister</th>
+                                    <th>Year</th>
+                                    <th>Author Name</th>
+                                    <th>Book Name</th>
+                                    <th>QR Code</th>
+                                    @if (userRole == "Student")
+                                    {
+
+                                    }
+                                    else
+                                    {
+                                        <th>Send Mail</th>
+                                    }
+                                    <th>Approved</th>
+                                     
+                                    @if (userRole == "Student")
+                                    {
+                                        <th>Lend</th>
+                                    }
+                                    else
+                                    {
+                                        <th>Took Away</th>
+                                    }
+                                   
+
+
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.UserName </td>
+                                        <td>@item.SchoolCode</td>
+                                        <td>@item.Faculty</td>
+                                        <td>@item.Year</td>
+                                        <td>@item.Author_Name</td>
+                                        <td>@item.BookName</td>
+                                        <td>
+                                            <a href="#" onclick="showImageModal('@item.filename')">Student Details</a>
+                                        </td>
+                                        @if (userRole == "Student")
+                                        {
+
+                                        }
+                                        else
+                                        {
+                                            <td>
+                                                <a href="/Student/Email?email=@item.Email" data-toggle="tooltip" data-placement="top" title="Send Mail">
+                                                    <i class="fa fa-paper-plane font-18 align-middle mr-2"></i>
+                                                </a>
+
+                                            </td>
+                                        }
+                                       
+
+                                        @if(userRole == "Student")
+                                        {
+                                            <td>
+
+                                                <input type="checkbox" @(item.IsApproved ? "checked" : "")  disabled/>
+
+
+                                            </td>
+                                            <td>
+
+                                                <input type="checkbox" @(item.istaken ? "checked" : "") disabled />
+
+
+                                            </td>
+                                        }
+                                        else
+
+                                        {
+                                            <td>
+
+                                                <input type="checkbox" @(item.IsApproved ? "checked" : "") onchange="handleCheckboxChange(@item.CartId, this.checked)" />
+
+
+                                            </td>
+                                            <td>
+
+                                                <input type="checkbox" @(item.istaken ? "checked" : "") onchange="handleApproveChange(@item.CartId, this.checked)" />
+
+
+                                            </td>
+                                        }
+
+                                     
+
+                                    </tr>
+                                }
+
+                            </tbody>
+                            <tfoot>
+                            </tfoot>
+                        </table>
+
+
+                        <div class="modal" id="imageModal" tabindex="-1" role="dialog">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        <img src="" alt="Image" class="img-fluid">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="hidemodal()">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+
+    function handleCheckboxChange(cartId, isChecked) {
+      
+        console.log("CartId: " + cartId + ", IsChecked: " + isChecked);   
+        fetch('/Student/ApprovedBook?cartId=' + cartId + '&checkedValue=' + isChecked, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then(response => response.json())
+            .then(data => {               
+                console.log('Success:', data);
+            })
+            .catch((error) => {              
+                console.error('Error:', error);
+            });
+    }
+
+    function handleApproveChange(cartId, isChecked) {
+
+        console.log("CartId: " + cartId + ", IsChecked: " + isChecked);
+        fetch('/Student/IsBookTaken?cartId=' + cartId + '&checkedValue=' + isChecked, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    }
+
+
+
+    function showImageModal(imageUrl) {
+        debugger;
+        console.log("filename", imageUrl)
+        $('#imageModal img').attr('src', imageUrl);
+        $('#imageModal').modal('show');
+    }
+
+    function hidemodal() {
+
+        $('#imageModal').modal('hide');
+    }
+
+    $(document).ready(function () {
+        debugger;
+        var message = '@ViewBag.Message';
+        if (message) {
+            SucessMessage(message)
+        }
+
+
+        var warningmessage = '@ViewBag.ErrorMessage';
+        if (warningmessage) {
+            DangerMessage(warningmessage)
+        }
+
+    });
+
+
+</script>

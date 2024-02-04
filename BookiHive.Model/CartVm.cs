@@ -14,5 +14,7 @@ namespace BookiHive.Model
         public string bookname { get; set; }
         public DateTime time { get; set; }
         public int count { get; set; }
+        public int Request { get; set; }
+        public List<CartList> cartlist { get; set; }
     }
 }

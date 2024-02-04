@@ -19,5 +19,6 @@ namespace BookiHive.Model
         public string year { get; set; }
         public double  price { get; set; }
         public int cartid { get; set; }
+        public int request { get; set; }
     }
 }

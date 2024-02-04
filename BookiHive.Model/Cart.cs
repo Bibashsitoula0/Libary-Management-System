@@ -15,5 +15,7 @@ namespace BookiHive.Model
         public int bookid { get; set; }
         public string bookname { get; set; }
         public DateTime time { get; set; }
+        public bool request { get; set; }
+        public bool isapproved { get; set; }
     }
 }

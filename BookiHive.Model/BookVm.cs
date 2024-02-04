@@ -9,6 +9,7 @@ namespace BookiHive.Model
 {
     public class BookVm
     {
+        public int Id { get; set; }
         public bool isdeleted { get; set; }
         public string bookname { get; set; }
         public int year { get; set; }

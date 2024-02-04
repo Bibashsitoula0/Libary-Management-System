@@ -21,30 +21,39 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Hosting;
 using static iTextSharp.text.pdf.AcroFields;
+using BookHive.Dal.AccountRepository;
+using AspNetCore;
+using BookHive.Dal.StudentRepository;
+using BookiHive.Model;
+using static Slapper.AutoMapper;
 
 namespace BookHive.Controllers
 {
     public class AccountController : Controller
     {
         private IConfiguration _configuration;
+        private readonly IStudentRepository _studentRepository;
         private Microsoft.AspNetCore.Hosting.IHostingEnvironment Environment;
         private UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly Email _email;
         private RoleManager<IdentityRole> _roleManager;
         private IAccountService _accountService;
+        private IAccountRepository _accountRepository;
         public readonly IHttpContextAccessor _httpContextAccessor;
 
-        public AccountController(SignInManager<ApplicationUser> signInManager, IConfiguration configuration, Email email, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, IAccountService accountService, IHttpContextAccessor httpContextAccessor, Microsoft.AspNetCore.Hosting.IHostingEnvironment environment)
+        public AccountController(IStudentRepository studentRepository,IAccountRepository accountRepository,SignInManager<ApplicationUser> signInManager, IConfiguration configuration, Email email, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, IAccountService accountService, IHttpContextAccessor httpContextAccessor, Microsoft.AspNetCore.Hosting.IHostingEnvironment environment)
         {
             _signInManager = signInManager;
             _configuration = configuration;
+            _studentRepository = studentRepository;
             _email = email;
             _userManager = userManager;
             _roleManager = roleManager;
             _accountService = accountService;
             _httpContextAccessor = httpContextAccessor;
             Environment = environment;
+            _accountRepository= accountRepository;
         }
 
         public IActionResult Index()
@@ -54,7 +63,7 @@ namespace BookHive.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        public IActionResult Login(string  message)
+        public IActionResult Login(string? message)
         {
             ViewBag.Message=message;
             return View();
@@ -345,13 +354,6 @@ namespace BookHive.Controllers
         }
 
         [AllowAnonymous]
-        public async Task<Object> BookHistory(string Code, string emails)
-        {
-
-            return View();
-        }
-
-        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> RegisterStudent()
         {
@@ -529,7 +531,6 @@ namespace BookHive.Controllers
 
         }
 
-
         [HttpGet]
         [Authorize(Roles = "admin")]
         public async Task<IActionResult> StudentDetails(string Id)
@@ -538,10 +539,33 @@ namespace BookHive.Controllers
             var details = data.FirstOrDefault();
             details.filename = "/Image/" + details.filename;
             return View(details);
-
         }
 
-       
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<object> BookHistory(string code,string userEmail)
+        {
+              StudentData obj = new StudentData();
+            var data = await _userManager.FindByEmailAsync(userEmail);
+            if (data == null)
+            {
+                return RedirectToAction("Login", "Account");
+
+            }
+            else
+            {
+                var query = await _studentRepository.getBorrowBookList();
+                var op = query.Where(x => x.UserId == data.Id && x.IsTaken==true).ToList();
+                obj.cartViewModels = op;                
+                var value = await _accountService.Getstudentbyid(data.Id);
+                obj.userdata= value;
+            }
+                     
+            return View(obj);
+        }
+
+
 
 
 

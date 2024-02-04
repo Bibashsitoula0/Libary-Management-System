@@ -15,3 +15,4 @@ C:\LibaryManagementSystem\Bookhive.Service\bin\Debug\net6.0\BookiHive.Model.dll
 C:\LibaryManagementSystem\Bookhive.Service\bin\Debug\net6.0\BookHive.Dal.pdb
 C:\LibaryManagementSystem\Bookhive.Service\bin\Debug\net6.0\BookiHive.Model.pdb
 C:\LibaryManagementSystem\Bookhive.Service\obj\Debug\net6.0\Bookhive.Service.csproj.CopyComplete
+C:\LibaryManagementSystem\Bookhive.Service\obj\Debug\net6.0\Bookhive.Service.sourcelink.json

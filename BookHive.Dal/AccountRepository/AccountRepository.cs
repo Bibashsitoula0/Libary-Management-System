@@ -80,5 +80,10 @@ namespace BookHive.Dal.AccountRepository
             var data = await _dah.FetchDerivedModelAsync<RegisterList>(query, parameters);
             return data;
         }
+
+        public Task<List<RegisterList>> getBooklend(string userid)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

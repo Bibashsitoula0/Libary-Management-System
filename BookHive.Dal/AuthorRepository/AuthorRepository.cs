@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using static Slapper.AutoMapper;
@@ -38,6 +39,35 @@ namespace BookHive.Dal.AuthorRepository
                 var id = await db.InsertAsync(model);
                 return id;
             }
+        }
+
+        public async Task<bool> ApproveRequest(int request, int cardId, int bookid) 
+        { 
+            string query = @"update cart set request=@Request ,isapproved=@approved where 
+                        id=@cardId and bookid=@bookid                  
+                ";
+            var parameters = new
+            {
+                request = request,
+                cardId = cardId,
+                Bookid = bookid,
+                approved = 0,
+            };
+            var data = await _dah.FetchDerivedModelAsync<dynamic>(query, parameters);
+            return true;
+        }
+
+        public async Task<bool> ApproveStudent(bool approve, int cartid)
+        {
+            string query = @"update cart set isapproved=@approve where 
+                          id=@cartid";
+            var parameters = new
+            {            
+                approve = approve,
+                cartid = cartid,
+            };
+            var data = await _dah.FetchDerivedModelAsync<dynamic>(query, parameters);
+            return true;
         }
 
         public async Task<List<BookList>> BookList()
@@ -95,11 +125,27 @@ namespace BookHive.Dal.AuthorRepository
             return user;
         }
 
+        public async Task<List<Book>> GetBook(int id)
+        {
+            string query = @"select * from books where id=@id";
+            var parameters = new { id = id };
+            var user = await _dah.FetchDerivedModelAsync<Book>(query, parameters);
+            return user;
+        }
+
         public async Task<List<CartList>> getCart(string userid)
         {
             string query = @"exec get_cart_list @userid";
             var parameters = new { userid = userid };
             var user = await _dah.FetchDerivedModelAsync<CartList>(query, parameters);
+            return user;
+        }
+
+        public async Task<List<Cart>> getCartList(int bookid, string userid)
+        {
+            string query = @"select * from cart where bookid=@Bookid and userid=@UserId";
+            var parameters = new { Bookid = bookid,UserId= userid };
+            var user = await _dah.FetchDerivedModelAsync<Cart>(query, parameters);
             return user;
         }
 
@@ -131,12 +177,35 @@ namespace BookHive.Dal.AuthorRepository
             return user;
         }
 
+        public async Task<bool> IsBookTaken(bool approve, int cartid)
+        {
+            
+            string query = @"update cart set istaken=@approve where 
+                        id=@cartid";
+            var parameters = new
+            {
+                cartid= cartid,
+                approve = approve
+            };
+            var data = await _dah.FetchDerivedModelAsync<dynamic>(query, parameters);
+            return true;
+        }
+
         public async Task<int> SaveCart(Cart model)
         {
             using (IDbConnection db = GetDbConnection())
             {
                 var id = await db.InsertAsync(model);
                 return id;
+            }
+        }
+
+        public async Task<bool> UpdateBook(Book model)
+        {
+            using (IDbConnection db = GetDbConnection())
+            {
+               await db.UpdateAsync(model);
+                return true;
             }
         }
     }

@@ -40,6 +40,14 @@ namespace BookHive.Controllers
         }
 
         [Authorize(Roles = "admin")]
+        [HttpGet]
+
+        public IActionResult UpdateAuthor()
+        {
+            return View();
+        }
+
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public async Task<Object> AddAuthor(AuthorList user)
         {
@@ -88,6 +96,53 @@ namespace BookHive.Controllers
                 item.bookimage = imagePath;
             }
             return View(data);
+        }
+
+        [HttpGet]
+        public async Task<object> UpdateBook(int id)
+        {
+            var authorname = await _authorrepo.GetAuthor();
+            var faculty = await _authorrepo.GetFaculty();
+            var semister = await _authorrepo.GetSemister();
+            var year = await _authorrepo.GetYear();
+
+            ViewBag.Authorname = authorname;
+            ViewBag.Faculty = faculty;
+            ViewBag.Semister = semister;
+            ViewBag.Year = year;
+
+            var data = await _authorrepo.GetBook(id);
+           var query= data.FirstOrDefault();
+            return View(query);
+        }
+
+        [HttpPost]
+        public async Task<object> UpdateBook(BookVm books)
+        {
+            dynamic filename = null;
+             if (books.bookimage != null)
+            {
+                filename = await UploadImage(books.bookimage, books.bookname[0].ToString());
+            }
+
+            var book = new Book();
+            book.id = books.Id;
+            book.bookimage = filename;
+            book.bookname = books.bookname;
+            book.totalbook = books.totalbook;
+            book.publisher = books.publisher;
+            book.price = books.price;
+            book.authorid = books.authorid;
+            book.faculty = books.faculty;
+            book.semister = books.semister;
+            book.year = books.year;
+            book.createdby = "Bibash";
+            book.updatedby = "Bibash";
+            book.isdeleted = false;
+
+             await _authorrepo.UpdateBook(book);
+
+            return RedirectToAction("BookList");
         }
 
 
