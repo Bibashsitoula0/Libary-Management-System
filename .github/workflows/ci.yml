@@ -30,10 +30,12 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal
 
-    - name: Build and Push Docker Image
-      uses: mr-smithers-excellent/docker-build-push@v4
-      with:
-        image: bibashsitoula/library_management_system
-        registry: docker.io
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
+    - name: Docker Build
+      run: docker build -f BookHive/Dockerfile -t bibashsitoula/library_management_system:master-54eeb17 .
+      
+    - name: Docker Push
+      run: docker push bibashsitoula/library_management_system:master-54eeb17
+      env:
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+  
