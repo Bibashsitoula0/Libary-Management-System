@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Bookhive.Service")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+31d945d68b42b42533fe7da5cbf782c1e2fe06fe")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+66714880a1dcc6a17970b1ea2e24b6f885bf8af9")]
 [assembly: System.Reflection.AssemblyProductAttribute("Bookhive.Service")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Bookhive.Service")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "hxA669+DHGN6sOM/Yg8jvZQ9+H2WqQY0e3ok5YbXD0XG65a+eIGvDGaZayWFhXnMF5lNi4SKS3sgalYvNpUktw==",
+  "dgSpecHash": "bP0w8V3a8wFIoX14+WvKuEXF7STWe9WyCbfjImWC95BOj9rEd4QR4JU08rLSnwEi3367Be3Q0/Y0FSRQy0KjAA==",
   "success": true,
   "projectFilePath": "C:\\LibaryManagementSystem\\BookHive.Dal\\BookHive.Dal.csproj",
   "expectedPackageFiles": [
@@ -170,7 +170,10 @@
     "C:\\Users\\Bibash\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
     "C:\\Users\\Bibash\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
     "C:\\Users\\Bibash\\.nuget\\packages\\system.xml.xpath\\4.3.0\\system.xml.xpath.4.3.0.nupkg.sha512",
-    "C:\\Users\\Bibash\\.nuget\\packages\\system.xml.xpath.xmldocument\\4.3.0\\system.xml.xpath.xmldocument.4.3.0.nupkg.sha512"
+    "C:\\Users\\Bibash\\.nuget\\packages\\system.xml.xpath.xmldocument\\4.3.0\\system.xml.xpath.xmldocument.4.3.0.nupkg.sha512",
+    "C:\\Users\\Bibash\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.27\\microsoft.windowsdesktop.app.ref.6.0.27.nupkg.sha512",
+    "C:\\Users\\Bibash\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.27\\microsoft.netcore.app.ref.6.0.27.nupkg.sha512",
+    "C:\\Users\\Bibash\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.27\\microsoft.aspnetcore.app.ref.6.0.27.nupkg.sha512"
   ],
   "logs": [
     {

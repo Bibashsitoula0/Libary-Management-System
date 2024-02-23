@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "2/44uALRpg+xAA5/IxR1U9U9AQP9lJ5p8NRZP2hKpjzLztMNz+eBQVp2T8k98hQoYWAmWsClS3K0hHgHVZBxOg==",
+  "dgSpecHash": "ehA1ny/lBCX6d+FwjVjL7zz//ZZPLXFiIkmR7WVN1vi/KZk0CKi6IesD5J4vZ06zjYCU9ML2/iRSjxW9EJ/vUg==",
   "success": true,
   "projectFilePath": "C:\\LibaryManagementSystem\\Bookhive.Service\\Bookhive.Service.csproj",
   "expectedPackageFiles": [
@@ -173,7 +173,10 @@
     "C:\\Users\\Bibash\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
     "C:\\Users\\Bibash\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
     "C:\\Users\\Bibash\\.nuget\\packages\\system.xml.xpath\\4.3.0\\system.xml.xpath.4.3.0.nupkg.sha512",
-    "C:\\Users\\Bibash\\.nuget\\packages\\system.xml.xpath.xmldocument\\4.3.0\\system.xml.xpath.xmldocument.4.3.0.nupkg.sha512"
+    "C:\\Users\\Bibash\\.nuget\\packages\\system.xml.xpath.xmldocument\\4.3.0\\system.xml.xpath.xmldocument.4.3.0.nupkg.sha512",
+    "C:\\Users\\Bibash\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.27\\microsoft.windowsdesktop.app.ref.6.0.27.nupkg.sha512",
+    "C:\\Users\\Bibash\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.27\\microsoft.netcore.app.ref.6.0.27.nupkg.sha512",
+    "C:\\Users\\Bibash\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.27\\microsoft.aspnetcore.app.ref.6.0.27.nupkg.sha512"
   ],
   "logs": [
     {

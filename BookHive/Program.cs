@@ -73,11 +73,11 @@ builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
 
-app.UseStaticFiles(new StaticFileOptions()
+/*app.UseStaticFiles(new StaticFileOptions()
 {
     FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @".\Image")),
     RequestPath = new PathString("/Image")
-});
+});*/
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
